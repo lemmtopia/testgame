@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../Player/Player.h"
 
 #include "raylib.h"
 #include <iostream>
@@ -25,9 +26,15 @@ void Game::Run() {
     const int screenHeight = 144;
     const int screenWidth = screenHeight * 16 / 9;
 
+    Sprite* bg = new Sprite("assets/textures/background.png", 0, 0);
+    bg->SetStatic();
+    sprites.push_back(bg);
+
     for (int i = 0; i < 50; i++) {
-        sprites.push_back(new Sprite("assets/textures/happy.png", std::rand() % screenWidth, std::rand() % screenHeight));
+        sprites.push_back(new Sprite("assets/textures/alexandrite.png", std::rand() % screenWidth, std::rand() % screenHeight));
     }
+
+    player = new Player("assets/textures/happy.png", screenWidth / 2, screenHeight / 2);
 
     Rectangle srcRect = {
         0, 0,
@@ -50,12 +57,16 @@ void Game::Run() {
         // Draw game
         BeginTextureMode(target);
         ClearBackground(RAYWHITE);
-        DrawText("Untitled Game", 0, 0, 10, BLACK);
         
         for (Sprite* s : sprites) {
             s->Update();
             s->Draw();
         }
+
+        player->Update();
+        player->Draw();
+
+        DrawText("Untitled Game", 0, 0, 10, WHITE);
 
         EndTextureMode();
 
@@ -70,6 +81,7 @@ Game::~Game() {
     CloseWindow();
 
     sprites.clear();
+    delete player;
 
     isRunning = false;
 }

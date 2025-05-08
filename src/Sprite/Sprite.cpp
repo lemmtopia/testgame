@@ -18,7 +18,7 @@ Sprite::Sprite(const char* fileName, float x, float y) {
 }
 
 Sprite::~Sprite() {
-    UnloadTexture(texture);
+    //UnloadTexture(texture);
 }
 
 void Sprite::Update() {
@@ -34,4 +34,9 @@ void Sprite::Update() {
 
 void Sprite::Draw() {
     DrawTexture(texture, x, y, WHITE);
+}
+
+void Sprite::SetStatic() {
+    dx = 0;
+    dy = 0;
 }

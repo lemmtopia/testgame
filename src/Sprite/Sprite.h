@@ -7,8 +7,10 @@ public:
     Sprite(const char* fileName, float x, float y);
     ~Sprite();
 
-    void Update();
+    virtual void Update();
     void Draw();
+
+    void SetStatic();
 protected:
     float x;
     float y;
