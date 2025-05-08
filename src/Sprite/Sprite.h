@@ -8,9 +8,12 @@ public:
     ~Sprite();
 
     virtual void Update();
-    void Draw();
+    void Draw(float offsetX, float offsetY);
 
     void SetStatic();
+
+    float GetX();
+    float GetY();
 protected:
     float x;
     float y;

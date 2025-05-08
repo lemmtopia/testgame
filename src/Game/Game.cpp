@@ -26,9 +26,7 @@ void Game::Run() {
     const int screenHeight = 144;
     const int screenWidth = screenHeight * 16 / 9;
 
-    Sprite* bg = new Sprite("assets/textures/background.png", 0, 0);
-    bg->SetStatic();
-    sprites.push_back(bg);
+    map = new TileMap("assets/textures/grass.png", 80, 80);
 
     for (int i = 0; i < 50; i++) {
         sprites.push_back(new Sprite("assets/textures/alexandrite.png", std::rand() % screenWidth, std::rand() % screenHeight));
@@ -58,13 +56,15 @@ void Game::Run() {
         BeginTextureMode(target);
         ClearBackground(RAYWHITE);
         
+        map->Draw(-player->GetX(), -player->GetY());
+
         for (Sprite* s : sprites) {
             s->Update();
-            s->Draw();
+            s->Draw(-player->GetX(), -player->GetY());
         }
 
         player->Update();
-        player->Draw();
+        //player->Draw();
 
         DrawText("Untitled Game", 0, 0, 10, WHITE);
 
@@ -72,7 +72,7 @@ void Game::Run() {
 
         // Apply target
         BeginDrawing();
-        DrawTexturePro(target.texture, srcRect, dstRect, origin, 0.0f, WHITE);
+        DrawTexturePro(target.texture, srcRect, dstRect, origin, 0, WHITE);
         EndDrawing();
     }
 }

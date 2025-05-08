@@ -25,18 +25,26 @@ void Sprite::Update() {
     const int screenHeight = 144;
     const int screenWidth = screenHeight * 16 / 9;
 
-    if (x <= 0 || x >= screenWidth) dx *= -1;
-    if (y <= 0 || y >= screenHeight) dy *= -1;
+    if (x <= 0 || x >= 16 * 80) dx *= -1;
+    if (y <= 0 || y >= 16 * 80) dy *= -1;
 
     x += dx;
     y += dy;
 }
 
-void Sprite::Draw() {
-    DrawTexture(texture, x, y, WHITE);
+void Sprite::Draw(float offsetX, float offsetY) {
+    DrawTexture(texture, x + offsetX, y + offsetY, WHITE);
 }
 
 void Sprite::SetStatic() {
     dx = 0;
     dy = 0;
+}
+
+float Sprite::GetX() {
+    return x;
+}
+
+float Sprite::GetY() {
+    return y;
 }

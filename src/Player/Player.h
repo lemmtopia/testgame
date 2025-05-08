@@ -10,6 +10,4 @@ public:
     void Update();
 private:
     float moveSpeed;
-    int health;
-    int maxHealth;
 };

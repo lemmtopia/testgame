@@ -23,11 +23,16 @@ Player::~Player() {
 void Player::Update() {
     dx = 0;
     dy = 0;
-    if (IsKeyDown(KEY_DOWN)) dy += moveSpeed;
-    if (IsKeyDown(KEY_UP)) dy -= moveSpeed;
-    if (IsKeyDown(KEY_RIGHT)) dx += moveSpeed;
-    if (IsKeyDown(KEY_LEFT)) dx -= moveSpeed;
+    if (IsKeyDown(KEY_S)) dy += moveSpeed;
+    if (IsKeyDown(KEY_W)) dy -= moveSpeed;
+    if (IsKeyDown(KEY_D)) dx += moveSpeed;
+    if (IsKeyDown(KEY_A)) dx -= moveSpeed;
 
     x += dx;
     y += dy;
+
+    if (x < 128) x = 128;
+    if (x > 80 * 16 - 256) x = 80 * 16 - 256;
+    if (y < 144 / 2) y = 144 / 2;
+    if (y > 80 * 16 - 128 - 16) y = 80 * 16 - 128 - 16;
 }
